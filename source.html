@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+                <style></style>
+            </head>
+            <body>
+                
+    
+        <meta charset="UTF-8">
+        <title>Doraemon's 4D Pocket</title>
+    
+    
+        <center>
+            <h1>Doraemon's 4D Pocket</h1>
+            <img src="https://miro.medium.com/v2/0*exuEcCGFzdEwb6JY.gif" width="70%"><br><br>
+            <button onclick="gadget()">Random Gadget</button>
+            <p id="secretgadget">Translation Gummy</p>
+        </center>
+    
+
+                <script>var verses = [
+    "Anywhere Door",
+    "Translation Gummy",
+    "Hopter",
+    "Memory Bread",
+    "Instant Wardrobe Camera",
+    "Time Kerchief",
+    "Art Access Light",
+    "Time Zeppelin",
+    "Shrink Ray",
+    "Magnify Ray"
+]
+
+function gadget(){
+    var random = parseInt(Math.random() * 9);
+    document.getElementById("secretgadget").innerText = verses[random];
+}</script>
+            
+        
+    </body>
