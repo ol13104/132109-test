@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+                <style></style>
+            </head>
+            <body>
+                
+
+    
+        <meta charset="UTF-8">
+        <title>My 1st Doraemon Test</title>
+    
+    
+        <h3>Mini Test</h3>
+        Q1. MS-903 = ?<br>
+        <input type="radio" name="q1" id="ans1">Doraemon
+        <input type="radio" name="q1" id="ans2">Dorami
+        <input type="radio" name="q1" id="ans3">Nobita
+        <button onclick="question1()">Submit</button>
+        <p id="results1">Oppps! You are WRONG! <img src="https://mystickermania.com/cdn/stickers/cartoons/doraemon-sad-512x512.png" width="20%"></p>
+
+        Q2. Doraemon's date of birth = ?<br>
+        <input type="radio" name="q2" id="ans4">2026.02.03
+        <input type="radio" name="q2" id="ans5">2112.09.03
+        <input type="radio" name="q2" id="ans6">2114.12.02
+        <button onclick="question2()">Submit</button>
+        <p id="results2">YOU ARE RIGHT!!!!!</p>
+
+        Q3. How fast can Nobita fall asleep?<br>
+        <input type="radio" name="q3" id="ans7">1 second
+        <input type="radio" name="q3" id="ans8">0.93 second
+        <input type="radio" name="q3" id="ans9">0.87 second
+        <button onclick="question3()">Submit</button>
+        <p id="results3">Oppps! You are WRONG! <img src="https://mystickermania.com/cdn/stickers/cartoons/doraemon-sad-512x512.png" width="20%"></p>
+    
+
+                <script>function question1(){
+    var ans1 = document.getElementById("ans1");
+    var ans2 = document.getElementById("ans2");
+    var ans3 = document.getElementById("ans3");
+
+    if(ans1.checked){
+        document.getElementById("results1").innerText = "YOU ARE RIGHT!!!!!";
+    }else if(ans2.checked || ans3.checked){
+        document.getElementById("results1").innerHTML = "Oppps! You are WRONG! <img src='https://mystickermania.com/cdn/stickers/cartoons/doraemon-sad-512x512.png' width='20%'>";
+    }   
+}
+
+function question2(){
+    var ans4 = document.getElementById("ans4");
+    var ans5 = document.getElementById("ans5");
+    var ans6 = document.getElementById("ans6");
+
+    if(ans5.checked){
+        document.getElementById("results2").innerText = "YOU ARE RIGHT!!!!!";
+    }else if(ans4.checked || ans6.checked){
+        document.getElementById("results2").innerHTML = "Oppps! You are WRONG! <img src='https://mystickermania.com/cdn/stickers/cartoons/doraemon-sad-512x512.png' width='20%'>";
+    }   
+}
+
+function question3(){
+    var ans7 = document.getElementById("ans7");
+    var ans8 = document.getElementById("ans8");
+    var ans9 = document.getElementById("ans9");
+
+    if(ans8.checked){
+        document.getElementById("results3").innerText = "YOU ARE RIGHT!!!!!";
+    }else if(ans7.checked || ans9.checked){
+        document.getElementById("results3").innerHTML = "Oppps! You are WRONG! <img src='https://mystickermania.com/cdn/stickers/cartoons/doraemon-sad-512x512.png' width='20%'>";
+    }   
+}</script>
+            
+        
+    </body>
