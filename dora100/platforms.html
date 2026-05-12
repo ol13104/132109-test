@@ -243,10 +243,10 @@
     <p>This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date.</p>
   </footer>
 
-  <script>
+<script>
     let currentLang = 'ja';
 
-    const platformsData = {
+const platformsData = {
       jp: [
         { 
           title: { ja: "WEB", en: "WEB", "zh-HK": "官方網站", "zh-TW": "官方網站", "zh-CN": "官方网站" },
@@ -340,22 +340,32 @@
       return obj[lang] || obj.ja || obj.en || "";
     }
 
+    // 新增：連結文字的多語言對應
+    const linkText = {
+      ja: "リンクへ →",
+      en: "Visit Link →",
+      "zh-HK": "前往連結 →",
+      "zh-TW": "前往連結 →",
+      "zh-CN": "前往链接 →"
+    };
+
     function renderSection(containerId, items, lang) {
       const container = document.getElementById(containerId);
       container.innerHTML = '';
-      
+     
       items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'official-card';
-        
+       
         const titleText = getText(item.title, lang);
         const descText = getText(item.desc, lang);
-        
+        const currentLinkText = linkText[lang] || linkText["zh-HK"];
+
         card.innerHTML = `
           <h3>${titleText}</h3>
           ${descText ? `<p>${descText}</p>` : ''}
           ${item.link !== "#" ?
-            `<a href="${item.link}" target="_blank" style="color:var(--dora-blue); font-weight:bold;">前往連結 →</a>` :
+            `<a href="${item.link}" target="_blank" style="color:var(--dora-blue); font-weight:bold;">${currentLinkText}</a>` :
             `<span class="unavailable">（已下架 / Unavailable）</span>`
           }
         `;
@@ -369,20 +379,80 @@
       closeModal();
 
       const t = {
-        ja: { logo: "100%ドラ(ファンサイト)", home:"HOME", events:"イベント情報", features:"注目ポイント", sculpture:"データベース", platforms:"公式サイト", pageTitle:"公式プラットフォーム",
-              hk:"香港 & 上海", jp:"日本", tw:"台灣", cn:"中國大陸", th:"泰國" },
-        en: { logo: "100% Dora(Fansite)", home:"HOME", events:"Event Info", features:"Features", sculpture:"Database", platforms:"Official Platforms", pageTitle:"Official Platforms",
-              hk:"Hong Kong & Shanghai", jp:"Japan", tw:"Taiwan", cn:"Mainland China", th:"Thailand" },
-        "zh-HK": { logo: "100%多啦(粉絲網站)", home:"首頁", events:"活動資訊", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"官方平台",
-              hk:"香港 & 上海", jp:"日本", tw:"台灣", cn:"中國大陸", th:"泰國" },
-        "zh-TW": { logo: "100%哆啦(粉絲網站)", home:"首頁", events:"活動資訊", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"官方平台",
-              hk:"香港 & 上海", jp:"日本", tw:"台灣", cn:"中國大陸", th:"泰國" },
-        "zh-CN": { logo: "100%哆啦(粉丝网站)", home:"首页", events:"活动资讯", features:"特点介绍", sculpture:"资料库", platforms:"官方平台", pageTitle:"官方平台",
-              hk:"香港 & 上海", jp:"日本", tw:"台湾", cn:"中国大陆", th:"泰国" }
+        ja: { 
+          logo: "100%ドラ(ファンサイト)", 
+          home:"HOME", 
+          events:"イベント情報", 
+          features:"注目ポイント", 
+          sculpture:"データベース", 
+          platforms:"公式サイト", 
+          pageTitle:"公式プラットフォーム",
+          hk:"香港 & 上海", 
+          jp:"日本", 
+          tw:"台灣", 
+          cn:"中國大陸", 
+          th:"泰國" 
+        },
+        en: { 
+          logo: "100% Dora(Fansite)", 
+          home:"HOME", 
+          events:"Event Info", 
+          features:"Features", 
+          sculpture:"Database", 
+          platforms:"Official Platforms", 
+          pageTitle:"Official Platforms",
+          hk:"Hong Kong & Shanghai", 
+          jp:"Japan", 
+          tw:"Taiwan", 
+          cn:"Mainland China", 
+          th:"Thailand" 
+        },
+        "zh-HK": { 
+          logo: "100%多啦(粉絲網站)", 
+          home:"首頁", 
+          events:"活動資訊", 
+          features:"特點介紹", 
+          sculpture:"資料庫", 
+          platforms:"官方平台", 
+          pageTitle:"官方平台",
+          hk:"香港 & 上海", 
+          jp:"日本", 
+          tw:"台灣", 
+          cn:"中國大陸", 
+          th:"泰國" 
+        },
+        "zh-TW": { 
+          logo: "100%哆啦(粉絲網站)", 
+          home:"首頁", 
+          events:"活動資訊", 
+          features:"特點介紹", 
+          sculpture:"資料庫", 
+          platforms:"官方平台", 
+          pageTitle:"官方平台",
+          hk:"香港 & 上海", 
+          jp:"日本", 
+          tw:"台灣", 
+          cn:"中國大陸", 
+          th:"泰國" 
+        },
+        "zh-CN": { 
+          logo: "100%哆啦(粉丝网站)", 
+          home:"首页", 
+          events:"活动资讯", 
+          features:"特点介绍", 
+          sculpture:"资料库", 
+          platforms:"官方平台", 
+          pageTitle:"官方平台",
+          hk:"香港 & 上海", 
+          jp:"日本", 
+          tw:"台湾", 
+          cn:"中国大陆", 
+          th:"泰国" 
+        }
       };
 
       const txt = t[lang] || t.ja;
-      
+     
       document.getElementById('logo').textContent = txt.logo;
       document.getElementById('nav-home').textContent = txt.home;
       document.getElementById('nav-events').textContent = txt.events;
@@ -396,7 +466,7 @@
       document.getElementById('cn-title').textContent = txt.cn;
       document.getElementById('th-title').textContent = txt.th;
 
-      // Render all sections with selected language
+      // 重新渲染所有區塊
       renderSection('jp-grid', platformsData.jp, lang);
       renderSection('hk-grid', platformsData.hk, lang);
       renderSection('tw-grid', platformsData.tw, lang);
@@ -404,14 +474,16 @@
       renderSection('th-grid', platformsData.th, lang);
     }
 
-    function showChineseModal() { 
-      document.getElementById('chineseModal').style.display = 'flex'; 
-    }
-    function closeModal() { 
-      document.getElementById('chineseModal').style.display = 'none'; 
+    function showChineseModal() {
+      document.getElementById('chineseModal').style.display = 'flex';
     }
 
+    function closeModal() {
+      document.getElementById('chineseModal').style.display = 'none';
+    }
+
+    // 頁面載入時預設日文
     window.onload = () => switchLang('ja');
-  </script>
+</script>
 </body>
 </html>
