@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100%ドラ(ファンサイト)</title>
+  <style>
+    :root {
+      --dora-blue: #2A7DE1;
+      --dora-red: #E60012;
+      --dora-yellow: #FFCC00;
+      --dora-lightblue: #A3D8FF;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      color: #333;
+      background: linear-gradient(to bottom, #A3D8FF 0%, #f0f8ff 100%);
+    }
+
+    header {
+      background: var(--dora-blue);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 15px;
+    }
+
+    .logo { font-size: 1.75em; font-weight: bold; white-space: nowrap; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+
+    nav a:hover { color: var(--dora-yellow); }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 8px 14px;
+      font-size: 0.9em;
+      background: var(--dora-red);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 70px;
+    }
+
+    .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border: 8px solid var(--dora-yellow);
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .modal h3 {
+      color: var(--dora-red);
+      margin-bottom: 25px;
+      font-size: 1.6em;
+    }
+
+    .modal button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 1.1em;
+      background: var(--dora-lightblue);
+      color: #003366;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal button:hover {
+      background: var(--dora-yellow);
+      transform: scale(1.03);
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 40px 20px; }
+
+    .section-title {
+      font-size: 2.3em;
+      color: var(--dora-red);
+      text-align: center;
+      margin: 55px 0 35px;
+      text-shadow: 3px 3px 0 rgba(255,204,0,0.4);
+    }
+
+    .products, .database-menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 35px;
+    }
+
+    .item {
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.4s;
+      border: 7px solid var(--dora-yellow);
+    }
+
+    .item:hover {
+      transform: translateY(-15px) scale(1.04);
+      border-color: var(--dora-red);
+    }
+
+    .item img {
+      width: 100%;
+      height: 270px;
+      object-fit: contain;
+      background: #f0f8ff;
+      padding: 15px;
+    }
+
+    .item-info { padding: 20px; text-align: center; }
+
+    .price {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--dora-red);
+      margin: 12px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 45px 20px;
+      background: var(--dora-blue);
+      color: white;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div class="logo" id="logo">Doraemon & Friends</div>
+ 
+
+      <div class="lang-switch">
+        <button onclick="switchLang('ja')">日本語</button>
+        <button onclick="switchLang('en')">English</button>
+        <button onclick="showChineseModal()">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Chinese Selection Modal -->
+  <div id="chineseModal" class="modal">
+    <div class="modal-content">
+      <h3>請選擇中文版本</h3>
+      <button onclick="switchLang('zh-HK')">香港繁體 (香港)</button>
+      <button onclick="switchLang('zh-TW')">台灣繁體 (台灣)</button>
+      <button onclick="switchLang('zh-CN')">简体中文 (大陸)</button>
+      <button onclick="closeModal()" style="background:#ccc; margin-top:20px;">取消</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title" id="info-section">Information</h2>
+    <div class="products" id="info-grid"></div>
+
+    <h2 class="section-title" id="database-section">Database</h2>
+    <div class="database-menu" id="database-grid"></div>
+  </div>
+
+  <footer>
+    <p>This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date.</p>
+  </footer>
+
+  <script>
+    let currentLang = 'ja';
+
+    const infoItems = [
+      { ja: { name: "イベント情報", desc: "イベントの詳細とチケット情報", price: "今すぐチケットを購入" },
+        en: { name: "Event Information", desc: "More about the event and ticketing info", price: "Buy Ticket NOW" },
+        "zh-HK": { name: "活動資訊", desc: "了解活動詳情及售票資訊", price: "快啲嚟買飛啦" },
+        "zh-TW": { name: "活動資訊", desc: "了解活動詳情及售票資訊", price: "快來買票吧" },
+        "zh-CN": { name: "活动资讯", desc: "了解活动详情及售票资讯", price: "快来买票吧" },
+        link: "https://example.com/product/anywhere-door"
+      },
+      { ja: { name: "公式サイト", desc: "最新の公式情報", price: "今すぐフォロー" },
+        en: { name: "Official Site", desc: "Stay informed with the latest official updates", price: "Follow NOW" },
+        "zh-HK": { name: "官方平台", desc: "了解即時及最新官方動態", price: "快啲follow啦" },
+        "zh-TW": { name: "官方平台", desc: "了解即時及最新官方動態", price: "快來追蹤吧" },
+        "zh-CN": { name: "官方平台", desc: "了解即時及最新官方動態", price: "快来追踪吧" },
+        link: "https://example.com/product/anywhere-door"
+      },
+      { ja: { name: "マッチングレンズ", desc: "等身大ドラえもんデータの即時識別", price: "(開発中)" },
+        en: { name: "Matching lenses", desc: "Instant identification of Doraemon data", price: "(Under development)" },
+        "zh-HK": { name: "造型配對鏡頭", desc: "即時辨認雕塑造型資料", price: "(開發中)" },
+        "zh-TW": { name: "造型配對鏡頭", desc: "即時辨認雕塑造型資料", price: "(開發中)" },
+        "zh-CN": { name: "造型配对镜头", desc: "即时辨认雕塑造型资料", price: "(开发中)" },
+        link: "https://example.com/product/anywhere-door"
+      }
+    ];
+
+    const databaseItems = [
+      { ja: { name: "大人気のドラえもん", desc: "ファンの間で最も人気のあるものは？", price: "詳しく見る" },
+        en: { name: "Popular Doraemon versions", desc: "Which look do fans like the most?", price: "Discover MORE" },
+        "zh-HK": { name: "最受歡迎嘅多啦A夢造型", desc: "粉絲最鍾意邊一款造型？", price: "開始探索之旅" },
+        "zh-TW": { name: "最受歡迎的哆啦A夢造型", desc: "粉絲最喜歡哪一款造型？", price: "開始探索之旅" },
+        "zh-CN": { name: "最受欢迎的哆啦A梦造型", desc: "粉丝最喜欢哪一款造型？", price: "开始探索之旅" },
+        link: "https://example.com/product/anywhere-door"
+      },
+      { ja: { name: "全ともだち図鑑", desc: "ユニークなドラえもんについてもっと知ろう！", price: "詳しく見る" },
+        en: { name: "Friendpedia", desc: "Discover more about the unique versions Doraemon", price: "Discover MORE" },
+        "zh-HK": { name: "全造型百科全書", desc: "深入了解每個造型", price: "開始探索之旅" },
+        "zh-TW": { name: "全造型百科全書", desc: "深入了解每個造型", price: "開始探索之旅" },
+        "zh-CN": { name: "全造型百科全书", desc: "深入了解每个造型", price: "开始探索之旅" },
+        link: "https://example.com/product/anywhere-door"
+      }
+    ];
+
+function renderItems(containerId, items, lang) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      items.forEach(item => {
+        const data = item[lang] || item.en;
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="item-info">
+              <h3>${data.name}</h3>
+              <p>${data.desc}</p>
+              <p class="price">${data.price}</p>
+            </div>
+          </a>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function showChineseModal() {
+      document.getElementById('chineseModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('chineseModal').style.display = 'none';
+    }
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      closeModal();
+
+      const t = {
+        ja: { logo: "100%ドラ(ファンサイト)", info: "情報", database: "データベース" },
+        en: { logo: "100% Dora(Fansite)", info: "Information", database: "Database" },
+        "zh-HK": { logo: "100%多啦(粉絲網站)", info: "資訊", database: "資料" },
+        "zh-TW": { logo: "100%哆啦(粉絲網站)", info: "資訊", database: "資料" },
+        "zh-CN": { logo: "100%哆啦(粉丝网站)", info: "資訊", database: "資料" }
+      };
+
+      document.getElementById('logo').textContent = t[lang].logo;
+      document.getElementById('info-section').textContent = t[lang].info;
+            document.getElementById('database-section').textContent = t[lang].database;
+
+      renderItems('info-grid', infoItems, lang);
+      renderItems('database-grid', databaseItems, lang);
+    }
+
+    window.onload = () => switchLang('ja');
+  </script>
+</body>
+</html>
