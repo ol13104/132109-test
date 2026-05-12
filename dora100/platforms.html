@@ -289,12 +289,12 @@ const platformsData = {
         },
         { 
           title: { ja: "Facebook", en: "Facebook", "zh-HK": "Facebook", "zh-TW": "Facebook", "zh-CN": "Facebook" },
-          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          desc: { ja: "削除されました", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
           link: "#" 
         },
         { 
           title: { ja: "Instagram", en: "Instagram", "zh-HK": "Instagram", "zh-TW": "Instagram", "zh-CN": "Instagram" },
-          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          desc: { ja: "削除されました", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
           link: "#" 
         }
       ],
@@ -318,17 +318,17 @@ const platformsData = {
       th: [
         { 
           title: { ja: "Facebook", en: "Facebook", "zh-HK": "Facebook", "zh-TW": "Facebook", "zh-CN": "Facebook" },
-          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          desc: { ja: "削除されました", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
           link: "#" 
         },
         { 
           title: { ja: "Instagram", en: "Instagram", "zh-HK": "Instagram", "zh-TW": "Instagram", "zh-CN": "Instagram" },
-          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          desc: { ja: "削除されました", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
           link: "#" 
         },
         { 
           title: { ja: "TikTok", en: "TikTok", "zh-HK": "TikTok", "zh-TW": "TikTok", "zh-CN": "TikTok" },
-          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          desc: { ja: "削除されました", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
           link: "#" 
         }
       ]
@@ -340,7 +340,7 @@ const platformsData = {
       return obj[lang] || obj.ja || obj.en || "";
     }
 
-    // 新增：連結文字的多語言對應
+// 連結文字多語言
     const linkText = {
       ja: "リンクへ →",
       en: "Visit Link →",
@@ -349,7 +349,16 @@ const platformsData = {
       "zh-CN": "前往链接 →"
     };
 
-    function renderSection(containerId, items, lang) {
+    // 「已下架」多語言
+    const unavailableText = {
+      ja: "（削除されました / Unavailable）",
+      en: "(Removed / Unavailable)",
+      "zh-HK": "（已下架 / Unavailable）",
+      "zh-TW": "（已下架 / Unavailable）",
+      "zh-CN": "（已下架 / Unavailable）"
+    };
+
+function renderSection(containerId, items, lang) {
       const container = document.getElementById(containerId);
       container.innerHTML = '';
      
@@ -360,13 +369,14 @@ const platformsData = {
         const titleText = getText(item.title, lang);
         const descText = getText(item.desc, lang);
         const currentLinkText = linkText[lang] || linkText["zh-HK"];
+        const currentUnavailable = unavailableText[lang] || unavailableText["zh-HK"];
 
         card.innerHTML = `
           <h3>${titleText}</h3>
           ${descText ? `<p>${descText}</p>` : ''}
           ${item.link !== "#" ?
             `<a href="${item.link}" target="_blank" style="color:var(--dora-blue); font-weight:bold;">${currentLinkText}</a>` :
-            `<span class="unavailable">（已下架 / Unavailable）</span>`
+            `<span class="unavailable">${currentUnavailable}</span>`
           }
         `;
         container.appendChild(card);
