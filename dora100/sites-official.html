@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100%ドラ(ファンサイト) | 官方平台</title>
+  <style>
+    :root {
+      --dora-blue: #2A7DE1;
+      --dora-red: #E60012;
+      --dora-yellow: #FFCC00;
+      --dora-lightblue: #A3D8FF;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      color: #333;
+      background: linear-gradient(to bottom, #A3D8FF 0%, #f0f8ff 100%);
+    }
+
+
+    header {
+      background: var(--dora-blue);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 15px;
+    }
+
+    .logo { font-size: 1.75em; font-weight: bold; white-space: nowrap; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+    
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+
+    nav a:hover { color: var(--dora-yellow); }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 8px 14px;
+      font-size: 0.9em;
+      background: var(--dora-red);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 70px;
+    }
+
+    .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border: 8px solid var(--dora-yellow);
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .modal h3 {
+      color: var(--dora-red);
+      margin-bottom: 25px;
+      font-size: 1.6em;
+    }
+
+    .modal button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 1.1em;
+      background: var(--dora-lightblue);
+      color: #003366;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal button:hover {
+      background: var(--dora-yellow);
+      transform: scale(1.03);
+    }
+    
+    .container { max-width: 1280px; margin: 0 auto; padding: 40px 20px; }
+    .section-title { font-size: 2.3em; color: var(--dora-red); text-align: center; margin: 55px 0 35px; }
+
+    .location-section { margin-bottom: 50px; }
+    .location-title {
+      font-size: 1.8em;
+      color: var(--dora-red);
+      margin: 40px 0 20px;
+      text-align: center;
+      border-bottom: 3px solid var(--dora-yellow);
+      padding-bottom: 10px;
+    }
+
+    .official-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .official-card {
+      background: white;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 7px solid var(--dora-yellow);
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .official-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--dora-red);
+    }
+
+    .official-card h3 {
+      color: var(--dora-red);
+      margin: 12px 0 8px;
+    }
+
+    .unavailable { color: #999; font-size: 0.9em; }
+    
+    footer {
+      text-align: center;
+      padding: 45px 20px;
+      background: var(--dora-blue);
+      color: white;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo" id="logo">Doraemon & Friends</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" id="nav-home">首頁</a></li>
+          <li><a href="events.html" id="nav-events">活動資訊</a></li>
+          <li><a href="features.html" id="nav-features">特點介紹</a></li>
+          <li><a href="database.html" id="nav-sculpture">資料庫</a></li>
+          <li><a href="platforms.html" id="nav-platforms">官方平台</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch">
+        <button onclick="switchLang('ja')">日本語</button>
+        <button onclick="switchLang('en')">English</button>
+        <button onclick="showChineseModal()">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="chineseModal" class="modal">
+    <div class="modal-content">
+      <h3>請選擇中文版本</h3>
+      <button onclick="switchLang('zh-HK')">香港繁體 (香港)</button>
+      <button onclick="switchLang('zh-TW')">台灣繁體 (台灣)</button>
+      <button onclick="switchLang('zh-CN')">简体中文 (大陸)</button>
+      <button onclick="closeModal()" style="background:#ccc; margin-top:20px;">取消</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 id="page-title">官方平台</h1>
+
+    <!-- Japan -->
+    <div class="location-section">
+      <h2 class="location-title" id="jp-title">日本</h2>
+      <div class="official-grid" id="jp-grid"></div>
+    </div>
+
+    <!-- Hong Kong & Shanghai -->
+    <div class="location-section">
+      <h2 class="location-title" id="hk-title">香港 & 上海</h2>
+      <div class="official-grid" id="hk-grid"></div>
+    </div>
+   
+    <!-- Taiwan -->
+    <div class="location-section">
+      <h2 class="location-title" id="tw-title">台灣</h2>
+      <div class="official-grid" id="tw-grid"></div>
+    </div>
+
+    <!-- China -->
+    <div class="location-section">
+      <h2 class="location-title" id="cn-title">中國大陸</h2>
+      <div class="official-grid" id="cn-grid"></div>
+    </div>
+
+    <!-- Thailand -->
+    <div class="location-section">
+      <h2 class="location-title" id="th-title">泰國</h2>
+      <div class="official-grid" id="th-grid"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date.</p>
+  </footer>
+
+  <script>
+    let currentLang = 'ja';
+
+    const platformsData = {
+      jp: [
+        { 
+          title: { ja: "WEB", en: "WEB", "zh-HK": "官方網站", "zh-TW": "官方網站", "zh-CN": "官方网站" },
+          desc: { ja: "", en: "", "zh-HK": "", "zh-TW": "", "zh-CN": "" },
+          link: "https://doraemon100japan.com/" 
+        },
+        { 
+          title: { ja: "Instagram", en: "Instagram", "zh-HK": "Instagram", "zh-TW": "Instagram", "zh-CN": "Instagram" },
+          desc: { ja: "", en: "", "zh-HK": "", "zh-TW": "", "zh-CN": "" },
+          link: "https://www.instagram.com/doraemon100_tour_japan/" 
+        },
+        { 
+          title: { ja: "X (Twitter)", en: "X (Twitter)", "zh-HK": "X (Twitter)", "zh-TW": "X (Twitter)", "zh-CN": "X (Twitter)" },
+          desc: { ja: "", en: "", "zh-HK": "", "zh-TW": "", "zh-CN": "" },
+          link: "https://x.com/doraemon100_jp" 
+        }
+      ],
+      hk: [
+        { 
+          title: { ja: "WEB", en: "WEB", "zh-HK": "官方網站", "zh-TW": "官方網站", "zh-CN": "官方网站" },
+          desc: { ja: "", en: "", "zh-HK": "", "zh-TW": "", "zh-CN": "" },
+          link: "https://doraemon100.com/" 
+        },
+        { 
+          title: { ja: "Facebook", en: "Facebook", "zh-HK": "Facebook", "zh-TW": "Facebook", "zh-CN": "Facebook" },
+          desc: { ja: "", en: "", "zh-HK": "", "zh-TW": "", "zh-CN": "" },
+          link: "https://www.facebook.com/100Doraemon" 
+        },
+        { 
+          title: { ja: "Instagram", en: "Instagram", "zh-HK": "Instagram", "zh-TW": "Instagram", "zh-CN": "Instagram" },
+          desc: { ja: "", en: "", "zh-HK": "", "zh-TW": "", "zh-CN": "" },
+          link: "https://www.instagram.com/doraemon100_tour" 
+        }
+      ],
+      tw: [
+        { 
+          title: { ja: "WEB", en: "WEB", "zh-HK": "官方網站", "zh-TW": "官方網站", "zh-CN": "官方网站" },
+          desc: { ja: "台北 + 高雄", en: "Taipei + Kaohsiung", "zh-HK": "台北 + 高雄", "zh-TW": "台北 + 高雄", "zh-CN": "台北 + 高雄" },
+          link: "https://uevent.udnfunlife.com/2025doraemon" 
+        },
+        { 
+          title: { ja: "Facebook", en: "Facebook", "zh-HK": "Facebook", "zh-TW": "Facebook", "zh-CN": "Facebook" },
+          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          link: "#" 
+        },
+        { 
+          title: { ja: "Instagram", en: "Instagram", "zh-HK": "Instagram", "zh-TW": "Instagram", "zh-CN": "Instagram" },
+          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          link: "#" 
+        }
+      ],
+      cn: [
+        { 
+          title: { ja: "小紅書", en: "Xiaohongshu", "zh-HK": "小紅書", "zh-TW": "小紅書", "zh-CN": "小红书" },
+          desc: { ja: "公式", en: "Official", "zh-HK": "官方", "zh-TW": "官方", "zh-CN": "官方" },
+          link: "https://www.xiaohongshu.com/user/profile/62fa76830000000012003daf" 
+        },
+        { 
+          title: { ja: "小紅書 (代理商)", en: "Xiaohongshu (Agent)", "zh-HK": "小紅書 (代理商)", "zh-TW": "小紅書 (代理商)", "zh-CN": "小红书 (代理商)" },
+          desc: { ja: "代理商", en: "Agent", "zh-HK": "代理商", "zh-TW": "代理商", "zh-CN": "代理商" },
+          link: "https://www.xiaohongshu.com/user/profile/64a52501000000002b0088f9" 
+        },
+        { 
+          title: { ja: "小紅書 (小助理)", en: "Xiaohongshu (Assistant)", "zh-HK": "小紅書 (小助理)", "zh-TW": "小紅書 (小助理)", "zh-CN": "小红书 (小助理)" },
+          desc: { ja: "代理商小助理", en: "Agent Assistant", "zh-HK": "代理商小助理", "zh-TW": "代理商小助理", "zh-CN": "代理商小助理" },
+          link: "https://www.xiaohongshu.com/user/profile/67d144b7000000000e01f107" 
+        }
+      ],
+      th: [
+        { 
+          title: { ja: "Facebook", en: "Facebook", "zh-HK": "Facebook", "zh-TW": "Facebook", "zh-CN": "Facebook" },
+          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          link: "#" 
+        },
+        { 
+          title: { ja: "Instagram", en: "Instagram", "zh-HK": "Instagram", "zh-TW": "Instagram", "zh-CN": "Instagram" },
+          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          link: "#" 
+        },
+        { 
+          title: { ja: "TikTok", en: "TikTok", "zh-HK": "TikTok", "zh-TW": "TikTok", "zh-CN": "TikTok" },
+          desc: { ja: "已下架", en: "Removed", "zh-HK": "已下架", "zh-TW": "已下架", "zh-CN": "已下架" },
+          link: "#" 
+        }
+      ]
+    };
+
+    function getText(obj, lang) {
+      if (!obj) return "";
+      if (typeof obj === "string") return obj;
+      return obj[lang] || obj.ja || obj.en || "";
+    }
+
+    function renderSection(containerId, items, lang) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'official-card';
+        
+        const titleText = getText(item.title, lang);
+        const descText = getText(item.desc, lang);
+        
+        card.innerHTML = `
+          <h3>${titleText}</h3>
+          ${descText ? `<p>${descText}</p>` : ''}
+          ${item.link !== "#" ?
+            `<a href="${item.link}" target="_blank" style="color:var(--dora-blue); font-weight:bold;">前往連結 →</a>` :
+            `<span class="unavailable">（已下架 / Unavailable）</span>`
+          }
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      closeModal();
+
+      const t = {
+        ja: { logo: "100%ドラ(ファンサイト)", home:"HOME", events:"イベント情報", features:"注目ポイント", sculpture:"データベース", platforms:"公式サイト", pageTitle:"公式プラットフォーム",
+              hk:"香港 & 上海", jp:"日本", tw:"台灣", cn:"中國大陸", th:"泰國" },
+        en: { logo: "100% Dora(Fansite)", home:"HOME", events:"Event Info", features:"Features", sculpture:"Database", platforms:"Official Platforms", pageTitle:"Official Platforms",
+              hk:"Hong Kong & Shanghai", jp:"Japan", tw:"Taiwan", cn:"Mainland China", th:"Thailand" },
+        "zh-HK": { logo: "100%多啦(粉絲網站)", home:"首頁", events:"活動資訊", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"官方平台",
+              hk:"香港 & 上海", jp:"日本", tw:"台灣", cn:"中國大陸", th:"泰國" },
+        "zh-TW": { logo: "100%哆啦(粉絲網站)", home:"首頁", events:"活動資訊", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"官方平台",
+              hk:"香港 & 上海", jp:"日本", tw:"台灣", cn:"中國大陸", th:"泰國" },
+        "zh-CN": { logo: "100%哆啦(粉丝网站)", home:"首页", events:"活动资讯", features:"特点介绍", sculpture:"资料库", platforms:"官方平台", pageTitle:"官方平台",
+              hk:"香港 & 上海", jp:"日本", tw:"台湾", cn:"中国大陆", th:"泰国" }
+      };
+
+      const txt = t[lang] || t.ja;
+      
+      document.getElementById('logo').textContent = txt.logo;
+      document.getElementById('nav-home').textContent = txt.home;
+      document.getElementById('nav-events').textContent = txt.events;
+      document.getElementById('nav-features').textContent = txt.features;
+      document.getElementById('nav-sculpture').textContent = txt.sculpture;
+      document.getElementById('nav-platforms').textContent = txt.platforms;
+      document.getElementById('page-title').textContent = txt.pageTitle;
+      document.getElementById('hk-title').textContent = txt.hk;
+      document.getElementById('jp-title').textContent = txt.jp;
+      document.getElementById('tw-title').textContent = txt.tw;
+      document.getElementById('cn-title').textContent = txt.cn;
+      document.getElementById('th-title').textContent = txt.th;
+
+      // Render all sections with selected language
+      renderSection('jp-grid', platformsData.jp, lang);
+      renderSection('hk-grid', platformsData.hk, lang);
+      renderSection('tw-grid', platformsData.tw, lang);
+      renderSection('cn-grid', platformsData.cn, lang);
+      renderSection('th-grid', platformsData.th, lang);
+    }
+
+    function showChineseModal() { 
+      document.getElementById('chineseModal').style.display = 'flex'; 
+    }
+    function closeModal() { 
+      document.getElementById('chineseModal').style.display = 'none'; 
+    }
+
+    window.onload = () => switchLang('ja');
+  </script>
+</body>
+</html>
