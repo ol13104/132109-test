@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100%ドラ(ファンサイト) | COMING SOON</title>
+  <style>
+    :root {
+      --dora-blue: #2A7DE1;
+      --dora-red: #E60012;
+      --dora-yellow: #FFCC00;
+      --dora-lightblue: #A3D8FF;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(to bottom, #A3D8FF 0%, #f0f8ff 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--dora-blue);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .logo { 
+      font-size: 1.75em; 
+      font-weight: bold; 
+      white-space: nowrap; 
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .construction {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .icon {
+      font-size: 120px;
+      margin-bottom: 20px;
+      animation: swing 2s infinite ease-in-out;
+    }
+
+    @keyframes swing {
+      0%, 100% { transform: rotate(-12deg); }
+      50% { transform: rotate(12deg); }
+    }
+
+    h1 {
+      font-size: 3.2em;
+      color: var(--dora-red);
+      margin: 15px 0 20px;
+      text-shadow: 3px 3px 0 var(--dora-yellow);
+    }
+
+    .subtitle {
+      font-size: 1.45em;
+      color: #0066cc;
+      margin-bottom: 40px;
+    }
+
+    .message {
+      background: white;
+      border-radius: 30px;
+      padding: 45px 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      border: 8px solid var(--dora-yellow);
+      margin-bottom: 50px;
+    }
+
+    .message p {
+      font-size: 1.25em;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .back-btn {
+      display: inline-block;
+      background: var(--dora-red);
+      color: white;
+      padding: 16px 40px;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(230, 0, 18, 0.3);
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: #ff3333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #666;
+      font-size: 0.95em;
+      background: rgba(255,255,255,0.6);
+    }
+
+    /* 手機優化 */
+    @media screen and (max-width: 768px) {
+      .icon { font-size: 90px; }
+      h1 { font-size: 2.6em; }
+      .message { padding: 35px 25px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo">100%ドラ(ファンサイト)</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="construction">
+      <div class="icon">🚧</div>
+      
+      <h1>製作中 COMING SOON</h1>
+      <p class="subtitle">This page is under construction</p>
+
+      <div class="message">
+        <p>
+          這個頁面正在努力製作中～<br><br>
+          多啦A夢和他的朋友們正在加緊趕工！<br>
+          請稍後再來看看吧♪
+        </p>
+      </div>
+
+      <a href="javascript:history.back()" class="back-btn">← 返回上一頁</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date.</p>
+  </footer>
+</body>
+</html>
