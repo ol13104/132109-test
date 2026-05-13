@@ -1,9 +1,436 @@
-このページは現在制作中です。<br>ドラえもんと仲間たちが準備しています！もう少しお待ちください♪
-<br>
-This page is currently under construction.<br>Doraemon and his friends are working hard! Please come back later♪
-<br>
-呢個頁面而家製作緊～<br>多啦A夢同佢嘅朋友加緊趕工！請稍後再嚟睇啦♪
-<br>
-這個頁面正在努力製作中～<br>哆啦A夢和他的朋友們正在加緊趕工！請稍後再來看看吧♪
-<br>
-这个页面正在努力制作中～<br>哆啦A梦和他的朋友们正在加紧赶工！请稍后再来看看吧♪
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100%ドラ(ファンサイト) | イベント情報</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    :root {
+      --dora-blue: #2A7DE1;
+      --dora-red: #E60012;
+      --dora-yellow: #FFCC00;
+      --dora-lightblue: #A3D8FF;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Microsoft YaHei", sans-serif;
+      margin: 0; padding: 0;
+      line-height: 1.7; color: #333;
+      background: linear-gradient(to bottom, #A3D8FF 0%, #f0f8ff 100%);
+    }
+    header {
+      background: var(--dora-blue);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 15px;
+    }
+
+    .logo { font-size: 1.75em; font-weight: bold; white-space: nowrap; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+    
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+
+    nav a:hover { color: var(--dora-yellow); }
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 8px 14px;
+      font-size: 0.9em;
+      background: var(--dora-red);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 70px;
+    }
+
+    .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border: 8px solid var(--dora-yellow);
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .modal h3 {
+      color: var(--dora-red);
+      margin-bottom: 25px;
+      font-size: 1.6em;
+    }
+
+    .modal button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 1.1em;
+      background: var(--dora-lightblue);
+      color: #003366;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal button:hover {
+      background: var(--dora-yellow);
+      transform: scale(1.03);
+    }
+    
+    .container { max-width: 1280px; margin: 0 auto; padding: 40px 20px; }
+    
+    .section-title {
+      font-size: 2.3em; color: var(--dora-red); text-align: center;
+      margin: 55px 0 35px; text-shadow: 3px 3px 0 rgba(255,204,0,0.4);
+    }
+
+    #map {
+      height: 650px; width: 100%; border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin: 25px 0;
+    }
+
+    .info-box {
+      position: absolute; top: 15px; left: 15px; background: white; padding: 15px;
+      border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
+      max-width: 320px;
+    }
+    footer {
+      text-align: center;
+      padding: 45px 20px;
+      background: var(--dora-blue);
+      color: white;
+      margin-top: 80px;
+    }
+
+/* ==================== 手機版 Header 優化 ==================== */
+.top-bar {
+    padding: 12px 15px;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 1.55em;           /* 桌面稍大，手機稍小 */
+}
+
+nav ul {
+    gap: 16px;                   /* 減少間距 */
+    font-size: 0.95em;
+}
+
+/* 手機專用調整 */
+@media screen and (max-width: 768px) {
+    .top-bar {
+        padding: 10px 12px;
+        flex-wrap: wrap;               /* 允許換行 */
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 1.45em;
+    }
+
+    nav ul {
+        gap: 12px;
+        font-size: 0.92em;
+        order: 3;                      /* 把選單移到最下面 */
+        width: 100%;                   /* 獨佔一行 */
+        justify-content: center;
+    }
+
+    .lang-switch {
+        order: 2;
+    }
+
+    /* 語言按鈕更小 */
+    .lang-switch button {
+        padding: 6px 10px;
+        font-size: 0.82em;
+        min-width: 58px;
+    }
+}
+
+/* 更小的手機（iPhone SE 等） */
+@media screen and (max-width: 480px) {
+    .logo {
+        font-size: 1.35em;
+    }
+    
+    nav ul {
+        gap: 10px;
+        font-size: 0.88em;
+    }
+    
+    .lang-switch button {
+        padding: 5px 8px;
+        font-size: 0.78em;
+        min-width: 52px;
+    }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo" id="logo">100%ドラ(ファンサイト)</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" id="nav-home">HOME</a></li>
+          <li><a href="events.html" id="nav-events">イベント情報</a></li>
+          <li><a href="features.html" id="nav-features">注目ポイント</a></li>
+          <li><a href="database.html" id="nav-sculpture">データベース</a></li>
+          <li><a href="platforms.html" id="nav-platforms">公式サイト</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch">
+        <button onclick="switchLang('ja')">日本語</button>
+        <button onclick="switchLang('en')">English</button>
+        <button onclick="showChineseModal()">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Chinese Selection Modal -->
+  <div id="chineseModal" class="modal">
+    <div class="modal-content">
+      <h3 id="modal-title">請選擇中文版本</h3>
+      <button onclick="switchLang('zh-HK')">繁體中文 (香港)</button>
+      <button onclick="switchLang('zh-TW')">繁體中文 (台灣)</button>
+      <button onclick="switchLang('zh-CN')">简体中文</button>
+      <button onclick="closeModal()" style="background:#ccc; margin-top:20px;">取消</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 id="page-title">活動資訊</h1>
+
+    <div class="content">
+      <h2 id="map-title">ドラえもんアジアツアー</h2>
+      <p id="map-desc">ドラえもんと一緒にアジア8都市を巡る特別アニメーションマップ！</p>
+
+      <div style="position: relative;">
+        <div id="map"></div>
+        
+        <div class="info-box" id="map-control">
+          <select id="langSelect" onchange="changeMapLanguage()" style="width:100%; padding:8px; margin-bottom:10px;">
+            <option value="ja">日本語</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="en">English</option>
+          </select>
+          <button onclick="startTour()" id="btn-start" style="width:100%; padding:12px; background:var(--dora-blue); color:white; border:none; border-radius:8px; font-weight:bold; margin-bottom:6px;">
+            ▶️ START
+          </button>
+          <button onclick="stopTour()" id="btn-stop" style="width:100%; padding:12px; background:#dc3545; color:white; border:none; border-radius:8px; font-weight:bold;">
+            ⏹️ STOP
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    This is a fansite for the Doraemon, and is completely unofficial.<br>
+    The information provided here in no way represents Doraemon official and may be inaccurate or out of date.
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    let currentLang = 'ja';
+    let map, tourInterval, currentIndex = 0;
+    let locations = [];
+
+    // Full Translations
+    const translations = {
+      ja: {
+        logo: "100%ドラ(ファンサイト)",
+        home: "HOME", events: "イベント情報", features: "注目ポイント", sculpture: "データベース", platforms: "公式サイト",
+        pageTitle: "活動資訊",
+        mapTitle: "ドラえもんアジアツアー",
+        mapDesc: "ドラえもんと一緒にアジア8都市を巡る特別アニメーションマップ！",
+        modalTitle: "請選擇中文版本",
+        startBtn: "▶️ START",
+        stopBtn: "⏹️ STOP",
+        footer: "This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date."
+      },
+      en: {
+        logo: "100% Dora(Fansite)",
+        home: "HOME", events: "Event Info", features: "Features", sculpture: "Database", platforms: "Official Sites",
+        pageTitle: "Event Information",
+        mapTitle: "Doraemon Asia Tour",
+        mapDesc: "Special animation map touring 8 wonderful places in Asia with Doraemon!",
+        modalTitle: "Please choose Chinese version",
+        startBtn: "▶️ START",
+        stopBtn: "⏹️ STOP",
+        footer: "This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date."
+      },
+      "zh-TW": {
+        logo: "100%哆啦(粉絲網站)",
+        home: "首頁", events: "活動資訊", features: "特點介紹", sculpture: "資料庫", platforms: "官方平台",
+        pageTitle: "活動資訊",
+        mapTitle: "哆啦A夢亞洲巡遊",
+        mapDesc: "和哆啦A夢一起遊覽亞洲8個精彩地點！",
+        modalTitle: "請選擇中文版本",
+        startBtn: "▶️ START",
+        stopBtn: "⏹️ STOP",
+        footer: "This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date."
+      },
+      "zh-HK": {
+        logo: "100%多啦(粉絲網站)",
+        home: "首頁", events: "活動資訊", features: "特點介紹", sculpture: "資料庫", platforms: "官方平台",
+        pageTitle: "活動資訊",
+        mapTitle: "多啦A夢亞洲巡遊",
+        mapDesc: "同多啦A夢一起遊覽亞洲8個精彩地點！",
+        modalTitle: "請選擇中文版本",
+        startBtn: "▶️ START",
+        stopBtn: "⏹️ STOP",
+        footer: "This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date."
+      },
+      "zh-CN": {
+        logo: "100%哆啦(粉丝网站)",
+        home: "首页", events: "活动资讯", features: "特点介绍", sculpture: "资料库", platforms: "官方平台",
+        pageTitle: "活动资讯",
+        mapTitle: "哆啦A梦亚洲巡游",
+        mapDesc: "和哆啦A梦一起游览亚洲8个精彩地点！",
+        modalTitle: "请选择中文版本",
+        startBtn: "▶️ START",
+        stopBtn: "⏹️ STOP",
+        footer: "This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date."
+      }
+    };
+
+    const locNames = {
+      ja: ["1. 香港📍尖沙咀 アベニュー・オブ・スターズ","2. 上海📍静安嘉里中心","3. タイ📍バンコク ICONSIAM","4. 広州📍広州 K11ショッピングアートセンター","5. 台北📍華山1914文化創意園区","6. 武漢📍武漢恒隆広場（Heartland 66）","7. 高雄📍国立科学工芸博物館","8. 東京📍有明 TOKYO DREAM PARK"],
+      "zh-TW": ["1. 香港📍尖沙咀 星光大道","2. 上海📍靜安嘉里中心","3. 泰國📍曼谷 暹羅天地","4. 廣州📍廣州K11購物藝術中心","5. 台北📍華山1914文創園區","6. 武漢📍武漢恒隆廣場","7. 高雄📍國立科學工藝博物館","8. 東京📍有明 TOKYO DREAM PARK"],
+      "zh-HK": ["1. 香港📍尖沙咀 星光大道","2. 上海📍靜安嘉里中心","3. 泰國📍曼谷 ICONSIAM","4. 廣州📍廣州K11購物藝術中心","5. 台北📍華山1914文創園區","6. 武漢📍武漢恒隆廣場","7. 高雄📍國立科學工藝博物館","8. 東京📍有明 TOKYO DREAM PARK"],
+      "zh-CN": ["1. 香港📍尖沙咀 星光大道","2. 上海📍静安嘉里中心","3. 泰国📍曼谷 暹罗天地","4. 广州📍广州K11购物艺术中心","5. 台北📍华山1914文创园区","6. 武汉📍武汉恒隆广场","7. 高雄📍国立科学工艺博物馆","8. 東京📍有明 TOKYO DREAM PARK"],
+      en: ["1. Hong Kong Avenue of Stars","2. Shanghai Jing'an Kerry Centre","3. Bangkok ICONSIAM","4. Guangzhou K11 Art Mall","5. Taipei Huashan 1914","6. Wuhan Hang Lung Plaza","7. Kaohsiung NST Museum","8. Tokyo Ariake Dream Park"]
+    };
+
+    const baseCoords = [
+      {lat:22.2931, lng:114.1748}, {lat:31.2245, lng:121.4502}, {lat:13.7267, lng:100.5105},
+      {lat:23.120, lng:113.322}, {lat:25.0444, lng:121.5294}, {lat:30.5807, lng:114.2702},
+      {lat:22.6414, lng:120.3227}, {lat:35.6291, lng:139.7877}
+    ];
+
+    function initMap(lang) {
+      if (map) map.remove();
+      map = L.map('map').setView([25, 115], 4);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+
+      locations = baseCoords.map((coord, i) => ({
+        name: locNames[lang] ? locNames[lang][i] : locNames.ja[i],
+        lat: coord.lat,
+        lng: coord.lng
+      }));
+
+      locations.forEach(loc => {
+        L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(`<b>${loc.name}</b>`);
+      });
+    }
+
+    function updatePageLanguage(lang) {
+      const t = translations[lang] || translations.ja;
+      
+      document.getElementById('logo').textContent = t.logo;
+      document.getElementById('nav-home').textContent = t.home;
+      document.getElementById('nav-events').textContent = t.events;
+      document.getElementById('nav-features').textContent = t.features;
+      document.getElementById('nav-sculpture').textContent = t.sculpture;
+      document.getElementById('nav-platforms').textContent = t.platforms;
+      document.getElementById('page-title').textContent = t.pageTitle;
+      document.getElementById('map-title').textContent = t.mapTitle;
+      document.getElementById('map-desc').textContent = t.mapDesc;
+      document.getElementById('modal-title').textContent = t.modalTitle;
+      document.getElementById('btn-start').innerHTML = t.startBtn;
+      document.getElementById('btn-stop').innerHTML = t.stopBtn;
+      document.getElementById('footer').innerHTML = t.footer;
+    }
+
+    window.startTour = function() {
+      if (tourInterval) clearInterval(tourInterval);
+      currentIndex = 0;
+      tourInterval = setInterval(() => {
+        if (currentIndex >= locations.length) { clearInterval(tourInterval); return; }
+        const loc = locations[currentIndex];
+        map.flyTo([loc.lat, loc.lng], 7.5, {duration: 3.5});
+        setTimeout(() => {
+          L.popup().setLatLng([loc.lat, loc.lng])
+            .setContent(`<b>${loc.name}</b>`)
+            .openOn(map);
+        }, 800);
+        currentIndex++;
+      }, 5200);
+    };
+
+    window.stopTour = function() {
+      if (tourInterval) clearInterval(tourInterval);
+    };
+
+    window.changeMapLanguage = function() {
+      const selected = document.getElementById('langSelect').value;
+      initMap(selected);
+    };
+
+    function showChineseModal() { document.getElementById('chineseModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('chineseModal').style.display = 'none'; }
+
+    window.switchLang = function(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === 'zh-CN' ? 'zh' : lang;
+      closeModal();
+      updatePageLanguage(lang);
+      initMap(lang === 'zh-HK' || lang === 'zh-TW' ? 'zh-TW' : lang);
+    };
+
+    // Initialize
+    window.onload = () => {
+      switchLang('ja');
+    };
+  </script>
+</body>
+</html>
