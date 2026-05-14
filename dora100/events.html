@@ -71,6 +71,7 @@
 
     .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
 
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -143,7 +144,7 @@
       margin-top: 80px;
     }
 
-/* ==================== 手機版 Header ==================== */
+/* ==================== 手機版 Header 優化 ==================== */
 .top-bar {
     padding: 12px 15px;
     gap: 12px;
@@ -213,7 +214,7 @@ nav ul {
 <body>
   <header>
     <div class="top-bar">
-<div class="logo" id="logo">100% Dora(Fansite)</div>
+      <div class="logo" id="logo">100%ドラ(ファンサイト)</div>
       <nav>
         <ul>
           <li><a href="index.html" id="nav-home">HOME</a></li>
@@ -270,16 +271,8 @@ nav ul {
     </div>
     
      <h2 id="section-title">展覽慶祝活動 - 櫻花節 (2026.04)</h2>
-<div class="video-responsive">
-  <iframe 
-    src="https://www.youtube.com/embed/nIi_61jYb9I?si=mLHjorwZUswxDEe7" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-  </iframe>
-</div>    
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nIi_61jYb9I?si=mLHjorwZUswxDEe7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
   </div>
 
   <footer id="footer">
@@ -293,6 +286,7 @@ nav ul {
     let map, tourInterval, currentIndex = 0;
     let locations = [];
 
+    // Full Translations
     const translations = {
       ja: {
         logo: "100%ドラ(ファンサイト)",
@@ -442,7 +436,10 @@ nav ul {
       initMap(lang === 'zh-HK' || lang === 'zh-TW' ? 'zh-TW' : lang);
     };
 
-    window.onload = () => switchLang('ja');
+    // Initialize
+    window.onload = () => {
+      switchLang('ja');
+    };
   </script>
 </body>
 </html>
