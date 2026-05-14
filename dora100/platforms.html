@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>100%ドラ(ファンサイト) | 官方平台</title>
+  <title>100%ドラ(ファンサイト) | 公式サイト</title>
   <style>
     :root {
       --dora-blue: #2A7DE1;
@@ -76,7 +76,6 @@
 
     .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
     
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -173,7 +172,7 @@
       margin-top: 80px;
     }
 
-/* ==================== 手機版 Header 優化 ==================== */
+/* ==================== 手機版 Header ==================== */
 .top-bar {
     padding: 12px 15px;
     gap: 12px;
@@ -243,7 +242,7 @@ nav ul {
 <body>
   <header>
     <div class="top-bar">
-      <div class="logo" id="logo">Doraemon & Friends</div>
+    <div class="logo" id="logo">100% Dora(Fansite)</div>
       <nav>
         <ul>
           <li><a href="index.html" id="nav-home">首頁</a></li>
@@ -274,31 +273,26 @@ nav ul {
   <div class="container">
     <h1 id="page-title">官方平台</h1>
 
-    <!-- Japan -->
     <div class="location-section">
       <h2 class="location-title" id="jp-title">日本</h2>
       <div class="official-grid" id="jp-grid"></div>
     </div>
 
-    <!-- Hong Kong & Shanghai -->
     <div class="location-section">
       <h2 class="location-title" id="hk-title">香港 & 上海</h2>
       <div class="official-grid" id="hk-grid"></div>
     </div>
    
-    <!-- Taiwan -->
     <div class="location-section">
       <h2 class="location-title" id="tw-title">台灣</h2>
       <div class="official-grid" id="tw-grid"></div>
     </div>
 
-    <!-- China -->
     <div class="location-section">
       <h2 class="location-title" id="cn-title">中國大陸</h2>
       <div class="official-grid" id="cn-grid"></div>
     </div>
 
-    <!-- Thailand -->
     <div class="location-section">
       <h2 class="location-title" id="th-title">泰國</h2>
       <div class="official-grid" id="th-grid"></div>
@@ -406,7 +400,6 @@ const platformsData = {
       return obj[lang] || obj.ja || obj.en || "";
     }
 
-// 連結文字多語言
     const linkText = {
       ja: "リンクへ →",
       en: "Visit Link →",
@@ -415,7 +408,6 @@ const platformsData = {
       "zh-CN": "前往链接 →"
     };
 
-    // 「已下架」多語言
     const unavailableText = {
       ja: "（削除されました / Unavailable）",
       en: "(Removed / Unavailable)",
@@ -542,7 +534,6 @@ function renderSection(containerId, items, lang) {
       document.getElementById('cn-title').textContent = txt.cn;
       document.getElementById('th-title').textContent = txt.th;
 
-      // 重新渲染所有區塊
       renderSection('jp-grid', platformsData.jp, lang);
       renderSection('hk-grid', platformsData.hk, lang);
       renderSection('tw-grid', platformsData.tw, lang);
@@ -558,8 +549,13 @@ function renderSection(containerId, items, lang) {
       document.getElementById('chineseModal').style.display = 'none';
     }
 
-    // 頁面載入時預設日文
-    window.onload = () => switchLang('ja');
+    window.onload = function() {
+      // Detect saved language from previous page
+      const savedLang = localStorage.getItem('preferredLanguage');
+      const defaultLang = savedLang && ['ja','en','zh-HK','zh-TW','zh-CN'].includes(savedLang) 
+                        ? savedLang 
+                        : 'ja';
+    switchLang(defaultLang);
 </script>
 </body>
 </html>
