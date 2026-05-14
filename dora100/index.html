@@ -376,13 +376,7 @@ function renderItems(containerId, items, lang) {
       renderItems('database-grid', databaseItems, lang);
     }
 
-      window.onload = function() {
-      const savedLang = localStorage.getItem('preferredLanguage');
-      const defaultLang = savedLang && ['ja','en','zh-HK','zh-TW','zh-CN'].includes(savedLang) 
-                        ? savedLang 
-                        : 'ja';
-
-      switchLang(defaultLang);
+    window.onload = () => switchLang('ja');
   </script>
 </body>
 </html>
