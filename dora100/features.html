@@ -28,7 +28,7 @@
       z-index: 100;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
-   
+  
     .top-bar {
       display: flex;
       align-items: center;
@@ -47,7 +47,7 @@
       padding: 0;
       flex-wrap: wrap;
     }
-   
+  
     nav a { color: white; text-decoration: none; font-weight: bold; }
     nav a:hover { color: var(--dora-yellow); }
     .lang-switch {
@@ -67,7 +67,6 @@
     }
     .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
 
-    /* Modal - 完全保留原有設計 */
     .modal {
       display: none;
       position: fixed;
@@ -78,7 +77,7 @@
       align-items: center;
       justify-content: center;
     }
-   
+  
     .modal-content {
       background: white;
       padding: 30px 40px;
@@ -113,10 +112,11 @@
     }
 
     .container { max-width: 1280px; margin: 0 auto; padding: 40px 20px; }
-    .section-title { 
-      font-size: 2.6em; 
-      color: var(--dora-red); 
-      text-align: center; 
+    
+    .section-title {
+      font-size: 2.6em;
+      color: var(--dora-red);
+      text-align: center;
       margin: 50px 0 60px;
       text-shadow: 3px 3px 0 var(--dora-yellow);
     }
@@ -126,7 +126,6 @@
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
     }
-
     .feature-card {
       background: white;
       border-radius: 25px;
@@ -148,7 +147,6 @@
       border-radius: 15px;
     }
     .feature-card h3 {
-      color: var(--dora-red);
       margin: 8px 0 6px;
       font-size: 1.45em;
     }
@@ -173,7 +171,6 @@
       color: var(--dora-red);
       font-weight: bold;
     }
-
     footer {
       text-align: center;
       padding: 45px 20px;
@@ -182,7 +179,6 @@
       margin-top: 80px;
     }
 
-    /* 手機版 Header 優化 */
     @media screen and (max-width: 768px) {
       .top-bar { padding: 10px 12px; gap: 10px; flex-wrap: wrap; }
       .logo { font-size: 1.45em; }
@@ -193,6 +189,7 @@
   </style>
 </head>
 <body>
+  <!-- Header and Modal remain unchanged -->
   <header>
     <div class="top-bar">
       <div class="logo" id="logo">Doraemon & Friends</div>
@@ -213,7 +210,6 @@
     </div>
   </header>
 
-  <!-- 中文切換視窗 - 完全保留原有設計 -->
   <div id="chineseModal" class="modal">
     <div class="modal-content">
       <h3>請選擇中文版本</h3>
@@ -226,9 +222,7 @@
 
   <div class="container">
     <h1 id="page-title" class="section-title">特點介紹</h1>
-    
     <div class="features-grid" id="features-grid"></div>
-
     <div class="explore-more" id="explore-more"></div>
   </div>
 
@@ -242,6 +236,7 @@
     const featuresData = [
       {
         image: "images/sweetpotato.jpg",
+        titleColor: "#E67E22",   // Orange
         title: { ja: "イモ", en: "Sweet Potato", "zh-HK": "番薯", "zh-TW": "番薯", "zh-CN": "番薯" },
         source: { 
           ja: "アニメ📺そして、みんなイモになる (TV 2020)", 
@@ -260,6 +255,7 @@
       },
       {
         image: "images/magicpill.jpg",
+        titleColor: "#9B59B6",   // Purple
         title: { ja: "サンタイン", en: "The Ligi-Vape Drops", "zh-HK": "神奇藥丸", "zh-TW": "型態轉換錠", "zh-CN": "液气丸" },
         source: { 
           ja: "まんが📖サンタイン (てんコミ 第33巻)", 
@@ -278,6 +274,7 @@
       },
       {
         image: "images/spy.jpg",
+        titleColor: "#2C3E50",   // Dark Blue
         title: { ja: "間諜", en: "Spy", "zh-HK": "間諜", "zh-TW": "間諜", "zh-CN": "间谍" },
         source: { 
           ja: "アニメ📺ドラドラスパイ大作戦 (TV 2018)", 
@@ -287,7 +284,7 @@
           "zh-CN": "动画📺哆啦哆啦间谍大作战 (TV 2018)" 
         },
         desc: { 
-          ja: "「很不高興為你服務」—— ひみつ道具「スパイ作戦ごっこセット」を使ってスパイに変身する。",
+          ja: "「はい、喜んで...じゃない！興為你服務」—— ひみつ道具「スパイ作戦ごっこセット」を使ってスパイに変身する。",
           en: "\"I'm not happy to serve you\" — Classic grumpy and cool expression.",
           "zh-HK": "「很不高興為你服務」—— 厭世表情，用神奇法寶「間諜作戰遊戲套裝」變身的間諜造型。",
           "zh-TW": "「很不高興為你服務」—— 冷淡表情，用祕密道具「諜戰遊戲組合」變身的間諜造型。",
@@ -296,6 +293,7 @@
       },
       {
         image: "images/lyingmirror.jpg",
+        titleColor: "#27AE60",   // Green
         title: { ja: "說謊鏡", en: "Lying Mirror", "zh-HK": "說謊鏡", "zh-TW": "說謊鏡", "zh-CN": "撒谎镜子" },
         source: { 
           ja: "まんが📖うそつきかがみ (てんコミ 第2巻)", 
@@ -306,7 +304,7 @@
         },
         desc: { 
           ja: "「だれ？」ひときわハンサムな容姿(？)",
-          en: "\"Who are you?"\" Classic and quirky handsome man look(?)",
+          en: "\"Who are you?\" Classic and quirky handsome man look(?)",
           "zh-HK": "「你邊位呀？」經典獵奇靚仔(?)造型",
           "zh-TW": "「你誰？」經典獵奇帥哥(?)造型",
           "zh-CN": "「你哪位呀？」经典猎奇帅哥(?)造型"
@@ -314,10 +312,11 @@
       },
       {
         image: "images/helpless.jpg",
+        titleColor: "#3498DB",   // Bright Blue
         title: { ja: "無奈", en: "Helpless", "zh-HK": "無奈", "zh-TW": "無奈", "zh-CN": "无奈" },
         source: { 
           ja: "アニメ📺人間味調味料 (TV 2019)", 
-          en: "Anime📺DThe Taste Seasoning of the Human World (TV 2019)", 
+          en: "Anime📺The Taste Seasoning of the Human World (TV 2019)", 
           "zh-HK": "動畫📺人情味調味料 (TV 2019)", 
           "zh-TW": "動畫📺人情味調味料 (TV 2019)", 
           "zh-CN": "动画📺人情味调味料 (TV 2019)" 
@@ -332,17 +331,18 @@
       },
       {
         image: "images/movie1983.jpg",
+        titleColor: "#F39C12",   // Golden Orange
         title: { ja: "電影1983", en: "Movie 1983", "zh-HK": "電影1983", "zh-TW": "電影1983", "zh-CN": "电影1983" },
         source: { 
           ja: "映画🎬のび太の海底鬼岩城 (1983)", 
-          en: "Movie🎬Nobita and the Castle of the Undersea Devil (1983)", 
+          en: "Movie🎬\"Nobita and the Castle of the Undersea Devil (1983)\"", 
           "zh-HK": "電影🎬《海底鬼岩城》 (1983)", 
           "zh-TW": "電影🎬《大雄的海底鬼岩城》 (1983)", 
           "zh-CN": "电影🎬《大雄的海底鬼岩城》 (1983)" 
         },
         desc: { 
           ja: "『海底鬼岩城』原作の船長ルック",
-          en: "Captain look from the original \"Castle of the Undersea Devil"\",
+          en: "Captain look from the original Castle of the Undersea Devil",
           "zh-HK": "《新・大雄之海底鬼岩城》製作藍本的船長造型",
           "zh-TW": "《新・大雄的海底鬼岩城》製作藍本的船長造型",
           "zh-CN": "《新・大雄的海底鬼岩城》制作蓝本的船长造型"
@@ -351,7 +351,7 @@
     ];
 
     const exploreText = {
-      ja: "展覧で他にもユニークなドラえもんを探索しよう～",
+      ja: "展覧で他にも素敵な作品を探索しよう～",
       en: "Explore more wonderful sculptures at the exhibition~",
       "zh-HK": "在展覽探索更多～",
       "zh-TW": "在展覽探索更多～",
@@ -366,19 +366,19 @@
     function renderFeatures(lang) {
       const container = document.getElementById('features-grid');
       container.innerHTML = '';
-
+      
       featuresData.forEach(item => {
         const card = document.createElement('div');
         card.className = 'feature-card';
         card.innerHTML = `
           <img src="${item.image}" alt="${getText(item.title, lang)}" onerror="this.src='https://via.placeholder.com/300x260?text=Image+Coming+Soon';">
-          <h3>${getText(item.title, lang)}</h3>
+          <h3 style="color: ${item.titleColor};">${getText(item.title, lang)}</h3>
           <small class="source">${getText(item.source, lang)}</small>
           <p>${getText(item.desc, lang)}</p>
         `;
         container.appendChild(card);
       });
-
+      
       document.getElementById('explore-more').textContent = exploreText[lang] || exploreText["zh-TW"];
     }
 
@@ -386,7 +386,7 @@
       currentLang = lang;
       document.documentElement.lang = lang;
       closeModal();
-
+      
       const t = {
         ja: { logo: "100%ドラ(ファンサイト)", home:"HOME", events:"イベントレビュー", features:"注目ポイント", sculpture:"データベース", platforms:"公式サイト", pageTitle:"特點介紹" },
         en: { logo: "100% Dora(Fansite)", home:"HOME", events:"Event Look Back", features:"Features", sculpture:"Database", platforms:"Official Platforms", pageTitle:"Features & Highlights" },
@@ -394,9 +394,8 @@
         "zh-TW": { logo: "100%哆啦(粉絲網站)", home:"首頁", events:"活動回顧", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"特點介紹" },
         "zh-CN": { logo: "100%哆啦(粉丝网站)", home:"首页", events:"活动回顾", features:"特点介绍", sculpture:"资料库", platforms:"官方平台", pageTitle:"特点介绍" }
       };
-
+      
       const txt = t[lang] || t.ja;
-
       document.getElementById('logo').textContent = txt.logo;
       document.getElementById('nav-home').textContent = txt.home;
       document.getElementById('nav-events').textContent = txt.events;
@@ -404,15 +403,15 @@
       document.getElementById('nav-sculpture').textContent = txt.sculpture;
       document.getElementById('nav-platforms').textContent = txt.platforms;
       document.getElementById('page-title').textContent = txt.pageTitle;
-
+      
       renderFeatures(lang);
     }
 
-    function showChineseModal() { 
-      document.getElementById('chineseModal').style.display = 'flex'; 
+    function showChineseModal() {
+      document.getElementById('chineseModal').style.display = 'flex';
     }
-    function closeModal() { 
-      document.getElementById('chineseModal').style.display = 'none'; 
+    function closeModal() {
+      document.getElementById('chineseModal').style.display = 'none';
     }
 
     window.onload = () => switchLang('ja');
