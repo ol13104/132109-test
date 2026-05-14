@@ -71,7 +71,6 @@
 
     .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
 
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -144,7 +143,7 @@
       margin-top: 80px;
     }
 
-/* ==================== 手機版 Header 優化 ==================== */
+/* ==================== 手機版 Header ==================== */
 .top-bar {
     padding: 12px 15px;
     gap: 12px;
@@ -214,7 +213,7 @@ nav ul {
 <body>
   <header>
     <div class="top-bar">
-      <div class="logo" id="logo">100%ドラ(ファンサイト)</div>
+<div class="logo" id="logo">100% Dora(Fansite)</div>
       <nav>
         <ul>
           <li><a href="index.html" id="nav-home">HOME</a></li>
@@ -294,7 +293,6 @@ nav ul {
     let map, tourInterval, currentIndex = 0;
     let locations = [];
 
-    // Full Translations
     const translations = {
       ja: {
         logo: "100%ドラ(ファンサイト)",
@@ -444,7 +442,6 @@ nav ul {
       initMap(lang === 'zh-HK' || lang === 'zh-TW' ? 'zh-TW' : lang);
     };
 
-    // Initialize
     window.onload = () => {
       switchLang('ja');
     };
