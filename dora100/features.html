@@ -413,7 +413,13 @@
       document.getElementById('chineseModal').style.display = 'none';
     }
 
-    window.onload = () => switchLang('ja');
+      window.onload = function() {
+      const savedLang = localStorage.getItem('preferredLanguage');
+      const defaultLang = savedLang && ['ja','en','zh-HK','zh-TW','zh-CN'].includes(savedLang) 
+                        ? savedLang 
+                        : 'ja';
+
+      switchLang(defaultLang);
   </script>
 </body>
 </html>
