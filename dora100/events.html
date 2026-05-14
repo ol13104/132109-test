@@ -19,14 +19,35 @@
       line-height: 1.7; color: #333;
       background: linear-gradient(to bottom, #A3D8FF 0%, #f0f8ff 100%);
     }
-    header {
-      background: var(--dora-blue);
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+header {
+  background: var(--dora-blue);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#map {
+  height: 650px; 
+  width: 100%; 
+  border-radius: 22px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  margin: 25px 0;
+  z-index: 1;
+  position: relative;
+}
+
+.info-box {
+  position: absolute; 
+  top: 15px; 
+  left: 15px; 
+  background: white; 
+  padding: 15px;
+  border-radius: 12px; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+  z-index: 1000;
+}
     
     .top-bar {
       display: flex;
