@@ -1,9 +1,421 @@
-このページは現在制作中です。<br>ドラえもんと仲間たちが準備しています！もう少しお待ちください♪
-<br>
-This page is currently under construction.<br>Doraemon and his friends are working hard! Please come back later♪
-<br>
-呢個頁面而家製作緊～<br>多啦A夢同佢嘅朋友加緊趕工！請稍後再嚟睇啦♪
-<br>
-這個頁面正在努力製作中～<br>哆啦A夢和他的朋友們正在加緊趕工！請稍後再來看看吧♪
-<br>
-这个页面正在努力制作中～<br>哆啦A梦和他的朋友们正在加紧赶工！请稍后再来看看吧♪
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100%ドラ(ファンサイト) | 特點介紹</title>
+  <style>
+    :root {
+      --dora-blue: #2A7DE1;
+      --dora-red: #E60012;
+      --dora-yellow: #FFCC00;
+      --dora-lightblue: #A3D8FF;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      color: #333;
+      background: linear-gradient(to bottom, #A3D8FF 0%, #f0f8ff 100%);
+    }
+    header {
+      background: var(--dora-blue);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+   
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 15px;
+    }
+    .logo { font-size: 1.75em; font-weight: bold; white-space: nowrap; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+   
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    nav a:hover { color: var(--dora-yellow); }
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+    .lang-switch button {
+      padding: 8px 14px;
+      font-size: 0.9em;
+      background: var(--dora-red);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 70px;
+    }
+    .lang-switch button:hover { background: #ff3333; transform: scale(1.05); }
+
+    /* Modal - 完全保留原有設計 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+   
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border: 8px solid var(--dora-yellow);
+      max-width: 420px;
+      width: 90%;
+    }
+    .modal h3 {
+      color: var(--dora-red);
+      margin-bottom: 25px;
+      font-size: 1.6em;
+    }
+    .modal button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 1.1em;
+      background: var(--dora-lightblue);
+      color: #003366;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal button:hover {
+      background: var(--dora-yellow);
+      transform: scale(1.03);
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 40px 20px; }
+    .section-title { 
+      font-size: 2.6em; 
+      color: var(--dora-red); 
+      text-align: center; 
+      margin: 50px 0 60px;
+      text-shadow: 3px 3px 0 var(--dora-yellow);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 7px solid var(--dora-yellow);
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .feature-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--dora-red);
+    }
+    .feature-card img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 15px;
+    }
+    .feature-card h3 {
+      color: var(--dora-red);
+      margin: 8px 0 6px;
+      font-size: 1.45em;
+    }
+    .feature-card .source {
+      display: block;
+      font-size: 0.92em;
+      color: #666;
+      margin-bottom: 12px;
+      font-weight: normal;
+      line-height: 1.5;
+    }
+    .feature-card p {
+      line-height: 1.8;
+      color: #444;
+      text-align: left;
+    }
+
+    .explore-more {
+      text-align: center;
+      margin: 70px 0 40px;
+      font-size: 1.35em;
+      color: var(--dora-red);
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 45px 20px;
+      background: var(--dora-blue);
+      color: white;
+      margin-top: 80px;
+    }
+
+    /* 手機版 Header 優化 */
+    @media screen and (max-width: 768px) {
+      .top-bar { padding: 10px 12px; gap: 10px; flex-wrap: wrap; }
+      .logo { font-size: 1.45em; }
+      nav ul { gap: 12px; font-size: 0.92em; order: 3; width: 100%; justify-content: center; }
+      .lang-switch { order: 2; }
+      .lang-switch button { padding: 6px 10px; font-size: 0.82em; min-width: 58px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo" id="logo">Doraemon & Friends</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" id="nav-home">首頁</a></li>
+          <li><a href="events.html" id="nav-events">活動回顧</a></li>
+          <li><a href="features.html" id="nav-features">特點介紹</a></li>
+          <li><a href="database.html" id="nav-sculpture">資料庫</a></li>
+          <li><a href="platforms.html" id="nav-platforms">官方平台</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch">
+        <button onclick="switchLang('ja')">日本語</button>
+        <button onclick="switchLang('en')">English</button>
+        <button onclick="showChineseModal()">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 中文切換視窗 - 完全保留原有設計 -->
+  <div id="chineseModal" class="modal">
+    <div class="modal-content">
+      <h3>請選擇中文版本</h3>
+      <button onclick="switchLang('zh-HK')">繁體中文 (香港)</button>
+      <button onclick="switchLang('zh-TW')">繁體中文 (台灣)</button>
+      <button onclick="switchLang('zh-CN')">简体中文</button>
+      <button onclick="closeModal()" style="background:#ccc; margin-top:20px;">取消</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 id="page-title" class="section-title">特點介紹</h1>
+    
+    <div class="features-grid" id="features-grid"></div>
+
+    <div class="explore-more" id="explore-more"></div>
+  </div>
+
+  <footer>
+    <p>This is a fansite for the Doraemon, and is completely unofficial.<br>The information provided here in no way represents Doraemon official and may be inaccurate or out of date.</p>
+  </footer>
+
+  <script>
+    let currentLang = 'ja';
+
+    const featuresData = [
+      {
+        image: "images/sweetpotato.jpg",
+        title: { ja: "イモ", en: "Sweet Potato", "zh-HK": "番薯", "zh-TW": "番薯", "zh-CN": "番薯" },
+        source: { 
+          ja: "アニメ📺そして、みんなイモになる (TV 2020)", 
+          en: "Anime📺Then, Everyone Became Sweet Potato (TV 2020)", 
+          "zh-HK": "動畫📺到最後, 大家都變成番薯 (TV 2020)", 
+          "zh-TW": "動畫📺最後 大家都變成蕃薯了 (TV 2020)", 
+          "zh-CN": "动画📺最后 大家都变成番薯了 (TV 2020)" 
+        },
+        desc: { 
+          ja: "展覽で爆発的人氣となった造型。周辺グッズが非常に多く、ファンに大人気の姿です。",
+          en: "The造型 that became explosively popular. It has tons of derivative merchandise and is deeply loved by fans.",
+          "zh-HK": "展覽令造型爆紅，超多衍生周邊，大受粉絲喜愛的經典造型。",
+          "zh-TW": "展覽令造型爆紅，超多衍生周邊，大受粉絲喜愛的經典造型。",
+          "zh-CN": "展览令造型爆红，超多衍生周边，大受粉丝喜爱的经典造型。"
+        }
+      },
+      {
+        image: "images/magicpill.jpg",
+        title: { ja: "サンタイン", en: "The Ligi-Vape Drops", "zh-HK": "神奇藥丸", "zh-TW": "型態轉換錠", "zh-CN": "液气丸" },
+        source: { 
+          ja: "まんが📖サンタイン (てんコミ 第33巻)", 
+          en: "Manga📖The Ligi-Vape Drops (TC Vol.33)", 
+          "zh-HK": "漫畫📖神奇藥丸 (單行本 Vol.33)", 
+          "zh-TW": "漫畫📖型態轉換錠 (單行本 Vol.33)", 
+          "zh-CN": "漫画📖液气丸 (单行本 Vol.33)" 
+        },
+        desc: { 
+          ja: "踏み潰された？多くの人が溶けたと勘違いする人気のユーモラスな姿。",
+          en: "Stepped on? Many people mistakenly think it melted. A very humorous and popular sculpture.",
+          "zh-HK": "踩扁了？很多人以為融化了的搞笑造型。",
+          "zh-TW": "踩扁了？很多人以為融化了的搞笑造型。",
+          "zh-CN": "踩扁了？很多人以为融化了的搞笑造型。"
+        }
+      },
+      {
+        image: "images/spy.jpg",
+        title: { ja: "間諜", en: "Spy", "zh-HK": "間諜", "zh-TW": "間諜", "zh-CN": "间谍" },
+        source: { 
+          ja: "アニメ📺ドラドラスパイ大作戦 (TV 2018)", 
+          en: "Anime📺Dora Dora Spy Battle (TV 2018)", 
+          "zh-HK": "動畫📺多啦多啦間諜大作戰 (TV 2018)", 
+          "zh-TW": "動畫📺哆啦哆啦間諜大作戰 (TV 2018)", 
+          "zh-CN": "动画📺哆啦哆啦间谍大作战 (TV 2018)" 
+        },
+        desc: { 
+          ja: "「很不高興為你服務」—— 經典冷淡表情の人気造型。",
+          en: "\"I'm not happy to serve you\" — Classic grumpy and cool expression.",
+          "zh-HK": "「很不高興為你服務」—— 經典冷淡表情，受歡迎的間諜造型。",
+          "zh-TW": "「很不高興為你服務」—— 經典冷淡表情，受歡迎的間諜造型。",
+          "zh-CN": "「很不高兴为你服务」—— 经典冷淡表情，受欢迎的间谍造型。"
+        }
+      },
+      {
+        image: "images/lyingmirror.jpg",
+        title: { ja: "說謊鏡", en: "Lying Mirror", "zh-HK": "說謊鏡", "zh-TW": "說謊鏡", "zh-CN": "撒谎镜子" },
+        source: { 
+          ja: "まんが📖うそつきかがみ (てんコミ 第2巻)", 
+          en: "Manga📖The Lying Mirror (TC Vol.2)", 
+          "zh-HK": "漫畫📖說謊鏡 (單行本 Vol.2)", 
+          "zh-TW": "漫畫📖說謊鏡 (單行本 Vol.2)", 
+          "zh-CN": "漫画📖撒谎镜子 (单行本 Vol.2)" 
+        },
+        desc: { 
+          ja: "「你邊位呀？」 獵奇イケメン造型として話題になった作品。",
+          en: "\"Who are you?」 A bizarre handsome guy style that became a hot topic.",
+          "zh-HK": "「你邊位呀？」獵奇帥哥造型，話題度極高的作品。",
+          "zh-TW": "「你邊位呀？」獵奇帥哥造型，話題度極高的作品。",
+          "zh-CN": "「你哪位呀？」猎奇帅哥造型，话题度极高的作品。"
+        }
+      },
+      {
+        image: "images/helpless.jpg",
+        title: { ja: "無奈", en: "Helpless", "zh-HK": "無奈", "zh-TW": "無奈", "zh-CN": "无奈" },
+        source: { 
+          ja: "アニメ📺人間味調味料 (TV 2019)", 
+          en: "Anime📺DThe Taste Seasoning of the Human World (TV 2019)", 
+          "zh-HK": "動畫📺人情味調味料 (TV 2019)", 
+          "zh-TW": "動畫📺人情味調味料 (TV 2019)", 
+          "zh-CN": "动画📺人情味调味料 (TV 2019)" 
+        },
+        desc: { 
+          ja: "非常に面白い表情パックとして大人気。SNSでよく使われる可愛い造型。",
+          en: "Extremely popular as a funny expression pack. A cute sculpture widely used on social media.",
+          "zh-HK": "有趣表情包，超適合用嚟玩梗的無奈臉。",
+          "zh-TW": "有趣表情包，超適合用來玩梗的無奈臉。",
+          "zh-CN": "有趣表情包，超适合用来玩梗的无奈脸。"
+        }
+      },
+      {
+        image: "images/movie1983.jpg",
+        title: { ja: "電影1983", en: "Movie 1983", "zh-HK": "電影1983", "zh-TW": "電影1983", "zh-CN": "电影1983" },
+        source: { 
+          ja: "1983年映画「のび太の海底鬼岩城」リメイク版原型", 
+          en: "Prototype for the remake of 1983 film 'Nobita's Undersea Ghost Castle'", 
+          "zh-HK": "1983年電影《大雄的海底鬼岩城》重製版藍本", 
+          "zh-TW": "1983年電影《大雄的海底鬼岩城》重製版藍本", 
+          "zh-CN": "1983年电影《大雄的海底鬼岩城》重制版蓝本" 
+        },
+        desc: { 
+          ja: "最新リメイク映画の藍本となった、非常に貴重で意義深い造型。",
+          en: "The original prototype for the latest remake movie. A very precious and meaningful sculpture.",
+          "zh-HK": "最新重製電影的藍本，具有重要意義的經典造型。",
+          "zh-TW": "最新重製電影的藍本，具有重要意義的經典造型。",
+          "zh-CN": "最新重制电影的蓝本，具有重要意义的经典造型。"
+        }
+      }
+    ];
+
+    const exploreText = {
+      ja: "展覧で他にも素敵な作品を探索しよう～",
+      en: "Explore more wonderful sculptures at the exhibition~",
+      "zh-HK": "在展覽探索更多～",
+      "zh-TW": "在展覽探索更多～",
+      "zh-CN": "在展览探索更多～"
+    };
+
+    function getText(obj, lang) {
+      if (!obj) return "";
+      return obj[lang] || obj.ja || obj.en || "";
+    }
+
+    function renderFeatures(lang) {
+      const container = document.getElementById('features-grid');
+      container.innerHTML = '';
+
+      featuresData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'feature-card';
+        card.innerHTML = `
+          <img src="${item.image}" alt="${getText(item.title, lang)}" onerror="this.src='https://via.placeholder.com/300x260?text=Image+Coming+Soon';">
+          <h3>${getText(item.title, lang)}</h3>
+          <small class="source">${getText(item.source, lang)}</small>
+          <p>${getText(item.desc, lang)}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById('explore-more').textContent = exploreText[lang] || exploreText["zh-TW"];
+    }
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      closeModal();
+
+      const t = {
+        ja: { logo: "100%ドラ(ファンサイト)", home:"HOME", events:"イベントレビュー", features:"注目ポイント", sculpture:"データベース", platforms:"公式サイト", pageTitle:"特點介紹" },
+        en: { logo: "100% Dora(Fansite)", home:"HOME", events:"Event Look Back", features:"Features", sculpture:"Database", platforms:"Official Platforms", pageTitle:"Features & Highlights" },
+        "zh-HK": { logo: "100%多啦(粉絲網站)", home:"首頁", events:"活動回顧", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"特點介紹" },
+        "zh-TW": { logo: "100%哆啦(粉絲網站)", home:"首頁", events:"活動回顧", features:"特點介紹", sculpture:"資料庫", platforms:"官方平台", pageTitle:"特點介紹" },
+        "zh-CN": { logo: "100%哆啦(粉丝网站)", home:"首页", events:"活动回顾", features:"特点介绍", sculpture:"资料库", platforms:"官方平台", pageTitle:"特点介绍" }
+      };
+
+      const txt = t[lang] || t.ja;
+
+      document.getElementById('logo').textContent = txt.logo;
+      document.getElementById('nav-home').textContent = txt.home;
+      document.getElementById('nav-events').textContent = txt.events;
+      document.getElementById('nav-features').textContent = txt.features;
+      document.getElementById('nav-sculpture').textContent = txt.sculpture;
+      document.getElementById('nav-platforms').textContent = txt.platforms;
+      document.getElementById('page-title').textContent = txt.pageTitle;
+
+      renderFeatures(lang);
+    }
+
+    function showChineseModal() { 
+      document.getElementById('chineseModal').style.display = 'flex'; 
+    }
+    function closeModal() { 
+      document.getElementById('chineseModal').style.display = 'none'; 
+    }
+
+    window.onload = () => switchLang('ja');
+  </script>
+</body>
+</html>
